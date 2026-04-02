@@ -5,17 +5,22 @@ import ReadingProgress from './components/ReadingProgress.vue'
 </script>
 
 <template>
-  <DefaultTheme.Layout>
-    <!-- 阅读进度条（所有页面） -->
+  <div class="layout-wrapper">
+    <!-- 阅读进度条（固定在顶部） -->
     <ReadingProgress />
     
-    <!-- 文章评论区 -->
-    <template #doc-after>
-      <GiscusComments />
-    </template>
-  </DefaultTheme.Layout>
+    <!-- 默认主题布局 -->
+    <DefaultTheme.Layout>
+      <!-- 文章底部评论区 -->
+      <template #doc-after>
+        <GiscusComments />
+      </template>
+    </DefaultTheme.Layout>
+  </div>
 </template>
 
-<style>
-/* 全局样式已在 custom.css 中定义 */
+<style scoped>
+.layout-wrapper {
+  position: relative;
+}
 </style>
