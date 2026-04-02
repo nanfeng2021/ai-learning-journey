@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>生成 OG 图片</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 40px;
+            background: #1a1a2e;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+        }
+        canvas {
+            box-shadow: 0 20px 60px rgba(0,0,0,0.5);
+        }
+    </style>
+</head>
+<body>
+    <canvas id="ogCanvas" width="1200" height="630"></canvas>
+    
+    <script>
+        const canvas = document.getElementById('ogCanvas');
+        const ctx = canvas.getContext('2d');
+        
+        // 创建渐变背景（蓝紫色）
+        const gradient = ctx.createLinearGradient(0, 0, 1200, 630);
+        gradient.addColorStop(0, '#667eea');
+        gradient.addColorStop(0.5, '#764ba2');
+        gradient.addColorStop(1, '#f093fb');
+        ctx.fillStyle = gradient;
+        ctx.fillRect(0, 0, 1200, 630);
+        
+        // 添加装饰性圆形
+        ctx.globalAlpha = 0.1;
+        for (let i = 0; i < 20; i++) {
+            const x = Math.random() * 1200;
+            const y = Math.random() * 630;
+            const r = Math.random() * 100 + 50;
+            ctx.beginPath();
+            ctx.arc(x, y, r, 0, Math.PI * 2);
+            ctx.fillStyle = 'white';
+            ctx.fill();
+        }
+        ctx.globalAlpha = 1;
+        
+        // 主标题 - 南风的博客
+        ctx.fillStyle = 'white';
+        ctx.font = 'bold 80px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif';
+        ctx.textAlign = 'center';
+        ctx.fillText('南风的博客', 600, 280);
+        
+        // 副标题 - 记录生活与技术
+        ctx.font = '48px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif';
+        ctx.globalAlpha = 0.95;
+        ctx.fillText('记录生活与技术', 600, 360);
+        
+        // 底部描述
+        ctx.font = '32px -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "PingFang SC", "Microsoft YaHei", sans-serif';
+        ctx.globalAlpha = 0.85;
+        ctx.fillText('AI 技术 · 编程实践 · 生活感悟', 600, 440);
+        
+        // 添加底线装饰
+        ctx.globalAlpha = 1;
+        ctx.strokeStyle = 'rgba(255,255,255,0.6)';
+        ctx.lineWidth = 4;
+        ctx.beginPath();
+        ctx.moveTo(450, 480);
+        ctx.lineTo(750, 480);
+        ctx.stroke();
+        
+        // GitHub ID
+        ctx.font = '24px monospace';
+        ctx.globalAlpha = 0.7;
+        ctx.textAlign = 'right';
+        ctx.fillText('@nanfeng2021', 1140, 580);
+        
+        // 右下角小图标（用文字模拟）
+        ctx.font = 'bold 28px monospace';
+        ctx.fillStyle = 'white';
+        ctx.fillText('</>', 1140, 540);
+        
+        console.log('OG 图片生成完成！');
+    </script>
+</body>
+</html>
